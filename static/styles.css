@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0b1220;
+  color: #e7eefc;
+}
+
+a {
+  color: #9cc7ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 18px;
+}
+
+.card {
+  background: #111a2e;
+  border: 1px solid #1c2a4b;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.card + .card {
+  margin-top: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #2a62ff;
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 6px 0 0 0;
+  color: #a9b7d3;
+  font-size: 14px;
+}
+
+.section-title {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 12px;
+}
+
+input[type="file"] {
+  background: #0b1220;
+  border: 1px solid #1c2a4b;
+  color: #e7eefc;
+  padding: 10px;
+  border-radius: 10px;
+  width: 360px;
+  max-width: 100%;
+}
+
+.button {
+  background: #2a62ff;
+  border: none;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button:hover {
+  filter: brightness(1.05);
+}
+
+.button.secondary {
+  background: transparent;
+  border: 1px solid #1c2a4b;
+  color: #e7eefc;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kpi {
+  background: #0b1220;
+  border: 1px solid #1c2a4b;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.kpi-label {
+  color: #a9b7d3;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #1c2a4b;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #1c2a4b;
+  text-align: left;
+}
+
+.table th {
+  color: #a9b7d3;
+  font-size: 13px;
+  font-weight: 600;
+  background: #0b1220;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}

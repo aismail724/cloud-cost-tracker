@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloud Cost Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-badge">CC</div>
+          <div>
+            <h1>Cloud Cost Tracker</h1>
+            <p class="subtitle">Upload a CSV and get a clean cost breakdown.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Upload your CSV</h2>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data" class="form-row">
+          <input type="file" name="csv_file" accept=".csv" required />
+          <button class="button" type="submit">Upload</button>
+        </form>
+
+        <p class="subtitle" style="margin-top: 12px;">
+          Don’t have a CSV? Create a test file like: <code>Date,Service,Cost</code>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
+

@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cost Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="brand">
+          <div class="brand-badge">CC</div>
+          <div>
+            <h1>Cost Results</h1>
+            <p class="subtitle">File: {{ filename }}</p>
+          </div>
+        </div>
+
+        <a class="button secondary" href="/">Upload another</a>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Summary</h2>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi-label">Total Cost</div>
+            <div class="kpi-value">${{ "%.2f"|format(total_cost) }}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label"># of Services</div>
+            <div class="kpi-value">{{ cost_per_service|length }}</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-label"># of Days</div>
+            <div class="kpi-value">{{ cost_per_day|length }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Charts</h2>
+
+        <div style="display: grid; gap: 14px;">
+          <div>
+            <div class="subtitle" style="margin: 0 0 8px 0;">Daily Cost</div>
+            <canvas id="dailyChart"></canvas>
+          </div>
+
+          <div>
+            <div class="subtitle" style="margin: 0 0 8px 0;">Cost by Service</div>
+            <canvas id="serviceChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Cost per Service</h2>
+        <table class="table">
+          <tr>
+            <th>Service</th>
+            <th>Cost</th>
+          </tr>
+
+          {% for service, cost in cost_per_service.items() %}
+          <tr>
+            <td>{{ service }}</td>
+            <td>${{ "%.2f"|format(cost) }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Cost per Day</h2>
+        <table class="table">
+          <tr>
+            <th>Date</th>
+            <th>Cost</th>
+          </tr>
+
+          {% for day, cost in cost_per_day.items() %}
+          <tr>
+            <td>{{ day }}</td>
+            <td>${{ "%.2f"|format(cost) }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Data passed from Flask into JavaScript
+      const dailyLabels = {{ daily_labels | tojson }};
+      const dailyValues = {{ daily_values | tojson }};
+
+      const serviceLabels = {{ service_labels | tojson }};
+      const serviceValues = {{ service_values | tojson }};
+
+      // ---- Daily line chart ----
+      const dailyCtx = document.getElementById("dailyChart");
+      new Chart(dailyCtx, {
+        type: "line",
+        data: {
+          labels: dailyLabels,
+          datasets: [{
+            label: "Cost ($)",
+            data: dailyValues,
+            tension: 0.25
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+
+      // ---- Service bar chart ----
+      const serviceCtx = document.getElementById("serviceChart");
+      new Chart(serviceCtx, {
+        type: "bar",
+        data: {
+          labels: serviceLabels,
+          datasets: [{
+            label: "Cost ($)",
+            data: serviceValues
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
+
